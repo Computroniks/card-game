@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 import random
+from typing import Union
 
 import Card
 
@@ -21,9 +22,25 @@ class Collection:
         :returns: Index card was added at
         :rtype: int
         """
-        
+
         self._cards.append(card)
         return len(self._cards) - 1
+
+    def removeCard(self, card: Union[Card.Card,int]) -> Card.Card:
+        """
+        Remove a given card from the collection. The card may be
+        specified by either index or instance
+
+        :param card: Index or instance to remove
+        :type card: Card.Card or int
+        :returns: The card that was removed
+        :rytpe: Card.Card
+        """
+
+        if type(card) == "int":
+            return self._cards.pop(card)
+        else:
+            return self._cards.pop(self._cards.index(card))
 
     def shuffle(self) -> None:
         """

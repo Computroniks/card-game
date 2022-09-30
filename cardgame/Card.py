@@ -18,6 +18,7 @@ class Card:
         self._value = value
         self._color = None
         self.suit = suit
+        self._visible = False
 
     @property
     def suit(self) -> str:
@@ -94,6 +95,31 @@ class Card:
         """
         
         return self._color
+
+    @property
+    def visible(self) -> bool:
+        """
+        Is this card visible to all?
+
+        :rtype: bool
+        """
+
+        return self._visible
+
+    def show(self) -> None:
+        """Show this card"""
+
+        self._visible = True
+
+    def hide(self) -> None:
+        """Hide this card"""
+
+        self._visible = False
+
+    def toggleVisible(self) -> None:
+        """Toggle the visibility of the card"""
+
+        self._visible = not self._visible
 
     def getParsedValue(self) -> str:
         """

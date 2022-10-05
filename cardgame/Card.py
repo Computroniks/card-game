@@ -20,6 +20,15 @@ class Card:
         self.suit = suit
         self._visible = False
 
+    def __str__(self) -> str:
+        """
+        String representation of class
+
+        :rtype: str
+        """
+
+        return f"{self.getParsedValue()} of {self._suit}"
+
     @property
     def suit(self) -> str:
         """

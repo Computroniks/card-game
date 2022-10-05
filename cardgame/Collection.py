@@ -165,3 +165,9 @@ class Deck(Collection):
 
 class Pile(Collection):    
     pass
+
+
+class Hand(Collection):
+    pass
+
+

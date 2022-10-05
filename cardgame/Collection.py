@@ -6,6 +6,38 @@ from typing import Union
 
 import Card
 
+class CollectionIter:
+    def __init__(self, collection) -> None:
+        """
+        Itterator for the Collection class
+        """
+        
+        self._cards = collection.cards
+        self._index = 0
+
+    def __iter__(self):
+        """
+        Iter method for Collection
+
+        :rtype: CollectionIter
+        """
+        
+        return self
+
+    def __next__(self) -> str:
+        """
+        Get the next item
+
+        :rtype: str
+        :raises: StopIteration
+        """
+        
+        if self._index < len(self._cards):
+            self._index += 1
+            return str(self._cards[self._index-1])
+        else:
+            raise StopIteration
+    
 
 class Collection:
     def __init__(self) -> None:
@@ -17,6 +49,12 @@ class Collection:
         """
         
         self._cards = []
+
+    def __iter__(self):
+        """
+        Custom iterator
+        """
+        return CollectionIter(self)
 
     @property
     def cards(self) -> list[Card.Card]:
@@ -80,14 +118,17 @@ class Collection:
         Pseudo random shuffle the cards
         Uses random.shuffle for pseudo random shuffling
         """
-        
-        random.shuffle(self._cards)
+
+        for i in range(len(self._cards*2)):
+            i1 = random.randint(0, len(self._cards)-1)
+            i2 = random.randint(0, len(self._cards)-1)
+            self._cards[i1], self._cards[i2] = self._cards[i2], self._cards[i1]
 
     def printDeck(self) -> None:
         """Output deck to console"""
         
         for i in self._cards:
-            print(f"{i.getParsedValue()} {i.suit}")
+            print(i)
 
 
 class Deck(Collection):
@@ -117,10 +158,10 @@ class Deck(Collection):
         else:
             card_range = (1,14)
             
-        for i in suits:
-            for j in range(card_range[0], card_range[1])
+        for suit in suits:
+            for i in range(card_range[0], card_range[1]):
+                self.addCard(Card.Card(suit, i))
 
 
-class Pile(Collection):
-    
-    
+class Pile(Collection):    
+    pass

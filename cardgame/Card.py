@@ -29,6 +29,7 @@ class Card:
 
         return f"{self.getParsedValue()} of {self._suit}"
 
+
     @property
     def suit(self) -> str:
         """

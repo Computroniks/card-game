@@ -64,7 +64,7 @@ class Collection:
 
     def addCard(self, card: Card.Card) -> int:
         """
-        Add a card to the collection
+        Add a card to the top of the collection
 
         :param card: The card to add
         :type card: Card.Card
@@ -112,6 +112,13 @@ class Collection:
             return self._cards.pop(card)
         else:
             return self._cards.pop(self._cards.index(card))
+
+    def pop(self) -> Card.Card:
+        """
+        Pop the top card
+        """
+
+        return self._cards.pop()
 
     def shuffle(self) -> None:
         """
@@ -162,12 +169,36 @@ class Deck(Collection):
             for i in range(card_range[0], card_range[1]):
                 self.addCard(Card.Card(suit, i))
 
+    def addCard(self, card: Card.Card) -> int:
+        """
+        Add a card to the top of the deck
+
+        :param card: The card to add
+        :type card: Card.Card
+        :returns: Index card was added at
+        :rtype: int
+        """
+        
+        card.show()
+        if len(self._cards) > 1:
+            self._cards[-1].hide()
+        return super().addCard(card)
+
 
 class Pile(Collection):    
-    pass
+    def addCard(self, card: Card.Card) -> int:
+        """
+        Add a card to the top of the pile
+
+        :param card: The card to add
+        :type card: Card.Card
+        :returns: Index card was added at
+        :rtype: int
+        """
+        
+        card.show()
+        return super().addCard(card)
 
 
 class Hand(Collection):
     pass
-
-

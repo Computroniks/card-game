@@ -202,3 +202,4 @@ class Pile(Collection):
 
 class Hand(Collection):
     pass
+

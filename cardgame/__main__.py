@@ -39,8 +39,47 @@ def deal(deck: Collection.Deck, players: list[Collection.Hand], num_cards: int =
         for player in players:
             player.addCard(deck.pop())
 
-def check(players: list[Collection.Hand]) -> list[tuple[int, bool]]:
+def check(players: list[Collection.Hand]) -> list[tuple[int, int]]:
     """
+    Check if each player has won or lost
+
+    :param players: Array of players
+    :type players: Collection.Hand
+    :returns: Tuple containing the index and win state of each player.
+        0 = lost, 1 = no change, 2 = won
+    :rtype: list[tuple[int, int]]
+    """
+
+    card_vals = {
+        1:1, 2:2,
+        3:3, 4:4, 5:5,
+        6:6, 7:7, 8:8,
+        9:9, 10:10, 11:10,
+        12:10, 13:10, 14:10
+    }
+
+    result = []
+
+    for i in range(len(players)):
+        total = 0
+        for card in players[i].cards:
+            total += card_vals[card.value]
+        if total == 21
+            result.append((i, 2))
+            return result
+        elif total < 21:
+            result.append((i, 1))
+        else:
+            result.append((i, 0))
+    return result
+
+def parseResults(results: list[tuple[int, int]]) -> list[int]:
+    """
+    Parse results
+
+    :param results: Results list
+    :type results: list[tuple[int, int]]
+    :rtype: list[int]
     """
 
 def main() -> int:
@@ -54,6 +93,18 @@ def main() -> int:
     deck = Collection.Deck(False)
     players = [Collection.Hand() for i in range(getPlayers())]
     deal(deck, players)
+
+    results = check(players)
+    del_list = []
+    for result in results:
+        if result[1] == 2:
+            print(f"Player {result[0]+1} has won")
+            return 0
+        elif not result[1]:
+            print(f"Player {result[0]+1} is out of the game")
+            del_list.append(result[0])
+
+    
 
     # Main game loop
     while True:
